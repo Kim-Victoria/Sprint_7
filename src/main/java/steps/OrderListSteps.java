@@ -3,13 +3,11 @@ package steps;
 import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import models.OrderModel;
 
 import static io.restassured.RestAssured.given;
+import static models.EndPoints.*;
 
 public class OrderListSteps {
-
-    public static final String ORDER_LIST_PATH = "/api/v1/orders";
 
     @Step("Получение списка заказов")
     public static Response getOrderList() {

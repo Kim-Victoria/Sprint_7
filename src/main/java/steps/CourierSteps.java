@@ -3,14 +3,11 @@ package steps;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import models.CourierModel;
+import static models.EndPoints.*;
 
 import static io.restassured.RestAssured.given;
 
 public class CourierSteps {
-
-    public static final String CREATE_COURIER_PATH = "/api/v1/courier";
-    public static final String LOGIN_COURIER_PATH = "/api/v1/courier/login";
-    public static final String DELETE_COURIER_PATH = "/api/v1/courier/";
 
     public static Response createCourier(CourierModel courier) {
         return given()

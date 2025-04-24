@@ -1,7 +1,7 @@
+import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
 import models.OrderModel;
 import org.junit.After;
 import org.junit.Test;
@@ -11,10 +11,12 @@ import steps.OrderSteps;
 
 import java.util.*;
 
+import static org.apache.http.HttpStatus.SC_CREATED;
+import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.Matchers.equalTo;
 import static steps.OrderSteps.createOrder;
-import static testData.TestValues.*;
+import static test.data.TestValues.*;
 
 @RunWith(Parameterized.class)
     public class CreateOrderTest extends BaseTest {
@@ -37,6 +39,7 @@ import static testData.TestValues.*;
 
     @Test
     @DisplayName("Успешное создание заказа")
+    @Description("Тест на успешное создание заказа с указанием всех обязательных полей")
     public void createOrderTest() {
         OrderModel order = new OrderModel(ORDER_FIRST_NAME, ORDER_LAST_NAME, ORDER_ADDRESS, ORDER_METRO_STATION, ORDER_PHONE, ORDER_RENT_TIME, ORDER_DELIVERY_DATE, "", color);
         Response response = createOrder(order);
@@ -56,11 +59,11 @@ import static testData.TestValues.*;
     }
     @Step("Проверка успешного создания заказа")
     public void createOrderStep(Response response) {
-        response.then().statusCode(201).body("track", notNullValue());
+        response.then().statusCode(SC_CREATED).body("track", notNullValue());
     }
     @Step ("Отмена заказа")
     public void checkDeleteOfOrderStep(Response response) {
-        response.then().statusCode(200).body("ok", equalTo(true));
+        response.then().statusCode(SC_OK).body("ok", equalTo(true));
     }
 }
 

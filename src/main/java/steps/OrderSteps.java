@@ -8,10 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static models.EndPoints.*;
 
 public class OrderSteps {
-    private static final String CREATE_ORDER_PATH = "/api/v1/orders";
-    public static final String CANCEL_ORDER_PATH = "/api/v1/orders/cancel/";
 
     public static Response createOrder(OrderModel order) {
         return given()
